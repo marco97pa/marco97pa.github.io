@@ -1,0 +1,13 @@
+{
+  "short_name": "Marco F.",
+  "name": "Marco Fantauzzo",
+  "icons": [
+    {
+      "src": "images/android-desktop.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#074878"
+}
