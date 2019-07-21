@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>404 - Marco Fantauzzo</title>
+  <title>Ask me anything - Marco Fantauzzo</title>
   <link rel="manifest" href="manifest.json">
   <meta name="description" content="Pagina non trovata - Marco Fantauzzo">
 		<meta name="keywords" content="marco,website,fantauzzo">
@@ -26,6 +26,20 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <style>
+    /*CUSTOM COLLECTION PANEL size*/
+    .collection .collection-item.avatar {
+        min-height: 162px;
+        padding-left: 150px;
+    }
+    .collection .collection-item.avatar:not(.circle-clipper) > .circle {
+      width: 128px; height: 128px;
+    }
+    /*Custom paragraph size*/
+    p {
+        line-height: 1.5rem;
+    }
+  </style>
 </head>
 
 
@@ -51,7 +65,7 @@
     <li><a href="index.html"><i class="material-icons">home</i>Home</a></li>
     <li><a href="curriculum.html"><i class="material-icons">work</i>Esperienza</a></li>
     <li><a href="feed.html"><i class="material-icons">rss_feed</i>Feed</a></li>
-    <li><a href="https://tellonym.me/marco97pa"><i class="material-icons">question_answer</i>Ask me anything<span class="badge"><i class="material-icons">open_in_new</i></span></a> </li>
+    <li><a href="ama.html"><i class="material-icons">question_answer</i>Ask me anything</a> </li>
     <li><div class="divider"></div></li>
     <li><a href="mailto:marco97pa@live.it?subject=Modulo contatti sito web">Contattami</a></li>
   </ul>
@@ -59,15 +73,33 @@
       <div class="container">
         <br><br>
         <div class="row">
-        <div class="col s12 m5">
-            <div class="icon-block center">
-            <h5 class="center"><b>Ops...</b> pagina non trovata</h5>
-            <p class="brown-text">errore 404</p>
-            <br>
-            <a class="waves-effect waves-light btn-large" href="index.html"><i class="material-icons right">home</i>Torna alla home</a>  
-        </div>
-        </div>
         <div class="col s12 m7">
+              <h3 class="center">Ask me anything</h3>
+              <p class="brown-text center">Chiedetemi tutto</p>
+
+              <br>
+              <span id="domanda">Vuoi sapere come si chiamava il mio primo animale domestico?</span>
+              <br>
+              <span>Sei nel posto giusto: basta premere il tasto qui sotto per chiedermelo</span>
+              <br><br>
+
+              <div class="ask-block center">
+                <a class="waves-effect waves-light pink darken-1 btn-large" href="https://tellonym.me/marco97pa"><i class="material-icons right">live_help</i>Fammi una domanda</a>  
+                <br>powered by <a href="https://tellonym.me" class="pink-text">Tellonym</a>
+              </div>
+              <br>
+
+              <ul class="collection">
+                  <li class="collection-item avatar">
+                    <img src="images/bitmoji.gif" alt="bitmoji" class="circle">
+                    <span class="title"><b>Pss...</b></span>
+                    <p id="risposta">Comunque sappi che il mio primo animale domestico si chiamava Chicco</p>
+                    <br><a href="ama.html">Voglio scoprire altro</a>
+                  </li>
+              </ul>
+
+        </div>
+        <div class="col s12 m5">
             <img class="responsive-img" src="images/lost.png">
         </div>
         </div>
@@ -82,6 +114,19 @@
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script src="js/moment.js"></script>
+  <script>
+    var domande = ["Vuoi sapere come si chiamava il mio primo animale domestico?",
+                   "Vuoi sapere quanti capelli ho in testa?",
+                   "Vuoi sapere a che età ho dato il primo bacio?",
+                   "Vuoi sapere qual'è la mia stagione preferita?"];
+    var risposte = ["Comunque sappi che il mio primo animale domestico si chiamava Chicco",
+                    "Beh, in realtà non so nemmeno io quanti capelli ho, ma sto cercando di scoprirlo",
+                    "Comunque sappi che ho dato il primo bacio a 13 anni. In realtà la leggenda narra che molto prima baciai una compagna alla scuola materna, ma non me lo ricordo esattamente",
+                    "Senza ombra di dubbio la mia stagione preferita è l'estate: il sole, il mare, la spiaggia e le serate sono qualcosa che adoro"];
+    i = Math.floor((Math.random() * 4));
+    $("#domanda").html(domande[i]);
+    $("#risposta").html(risposte[i]);
+  </script>
   </body>
 </html>
 
