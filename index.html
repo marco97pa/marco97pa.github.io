@@ -85,7 +85,7 @@
       <div class="background">
         <img src="images/office.jpg">
       </div>
-      <a href="#user"><img class="circle" src="images/profile.jpg"></a>
+      <a href="#user" class="modal-copy" data-clipboard-text="marco97pa"><img class="circle" src="images/profile.jpg"></a>
       <a href="#name"><span class="white-text name">Marco Fantauzzo</span></a>
       <a href="#email"><span class="white-text email"> </span></a>
     </div></li>
@@ -133,11 +133,57 @@
             
             <br style="clear:both;">
             <h4>Giochi</h4>
-            <div class="custom-fab"><a onclick="alert('Fortnite \n Il mio nickname &egrave;: marco97pa \n\n Attenzione: Se sei su PS4 o XboxOne devi aver creato un account Epic Games prima di potermi aggiungere tra i tuoi amici')" class="btn-floating btn-large waves-effect waves-light"><img src="images/fortnite.jpg" class="circle"/></a><span class="sub-fab">Fortnite</span></div>
-            <div class="custom-fab"><a onclick="alert('PUBG \n Il mio nickname &egrave;: marco97pa')"  class="btn-floating btn-large waves-effect waves-light"><img src="images/pubg.jpg" class="circle"/></a></a><span class="sub-fab">PUBG</span></div>
-            <div class="custom-fab"><a onclick="alert('Pokemon GO \n Il mio codice allenatore &egrave;: 1716 9509 5147')" class="btn-floating btn-large waves-effect waves-light light"><img src="images/pokemon.jpg" class="circle"/></a><span class="sub-fab">Pokèmon GO</span></div>
+            <div class="custom-fab"><a href="#mariokart" class="btn-floating btn-large waves-effect waves-light light modal-trigger"><img src="images/mariokart.png" class="circle"/></a><span class="sub-fab">Mario Kart Tour</span></div>
+            <div class="custom-fab"><a href="#fortnite" class="btn-floating btn-large waves-effect waves-light modal-trigger"><img src="images/fortnite.jpg" class="circle"/></a><span class="sub-fab">Fortnite</span></div>
+            <div class="custom-fab"><a href="#pubg"  class="btn-floating btn-large waves-effect waves-light modal-trigger"><img src="images/pubg.jpg" class="circle"/></a></a><span class="sub-fab">PUBG Mobile</span></div>
+            <div class="custom-fab"><a href="#pokemongo" class="btn-floating btn-large waves-effect waves-light light modal-trigger"><img src="images/pokemon.jpg" class="circle"/></a><span class="sub-fab">Pokèmon GO</span></div>
             <div class="custom-fab"><a href="https://players.turbo.trackmania.com/pc/profile/faqyxyno-pc58cbd7fc51a76" class="btn-floating btn-large waves-effect waves-light light"><img src="images/tm.jpg" class="circle"/></a><span class="sub-fab">Trackmania Turbo</span></div>
             
+            <!-- Modal (Custom Material Alerts with ability to copy text) -->
+            <div id="fortnite" class="modal">
+              <div class="modal-content">
+                <h4>Fortnite</h4>
+                <p>Il mio nickname è: <b id="copy_fortnite">marco97pa</b> <br> Attenzione: Se sei su PS4 o XboxOne devi aver creato un account Epic Games prima di potermi aggiungere tra i tuoi amici</p>
+              </div>
+              <div class="modal-footer">
+                <a href="#!" data-clipboard-target="#copy_fortnite" class="modal-copy waves-effect waves-green btn-flat" >Copia nickname</a>
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Chiudi</a>
+              </div>
+            </div>
+
+            <div id="pubg" class="modal">
+                <div class="modal-content">
+                  <h4>PUBG Mobile</h4>
+                  <p>Il mio nickname è: <b id="copy_pubg">marco97pa</b></p>
+                </div>
+                <div class="modal-footer">
+                  <a href="#!" data-clipboard-target="#copy_pubg" class="modal-copy waves-effect waves-green btn-flat">Copia nickname</a>
+                  <a href="#!" class="modal-close waves-effect waves-green btn-flat">Chiudi</a>
+                </div>
+              </div>
+
+            <div id="pokemongo" class="modal">
+                <div class="modal-content">
+                  <h4>Pokèmon GO</h4>
+                  <p>Il mio codice allenatore è: <b id="copy_pogo">171695095147</b></p>
+                </div>
+                <div class="modal-footer">
+                  <a href="#!" data-clipboard-target="#copy_pogo" class="modal-copy waves-effect waves-green btn-flat">Copia codice</a>
+                  <a href="#!" class="modal-close waves-effect waves-green btn-flat">Chiudi</a>
+                </div>
+              </div>
+
+            <div id="mariokart" class="modal">
+                <div class="modal-content">
+                  <h4>Mario Kart Tour</h4>
+                  <p>Il mio codice giocatore è: <b id="copy_mkt">469851246202</b></p>
+                </div>
+                <div class="modal-footer">
+                  <a href="#!" data-clipboard-target="#copy_mkt" class="modal-copy waves-effect waves-green btn-flat">Copia codice</a>
+                  <a href="#!" class="modal-close waves-effect waves-green btn-flat">Chiudi</a>
+                </div>
+              </div>
+
           </div>
 
       </div>
@@ -175,16 +221,28 @@
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script src="js/moment.js"></script>
+  <script src="js/clipboard.min.js"></script>
   <script>
-    
     $(document).ready(function(){
       $('.sidenav').sidenav();
+      $('.modal').modal();
     });
+
+    var clipboard = new ClipboardJS('.modal-copy');
+    clipboard.on('success', function(e) {
+      console.info('Action:', e.action);
+      console.info('Text:', e.text);
+      console.info('Trigger:', e.trigger);
+      M.toast({html: 'Copiato negli appunti'})
+      e.clearSelection();
+    });
+
 
     var nascita = moment("19971124", "YYYYMMDD");
     var anni = moment().diff(nascita, 'years', true);
     anni = parseInt(anni);
     document.getElementById("anni").innerHTML = anni;
+
   </script>
 
   </body>
