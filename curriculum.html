@@ -133,7 +133,7 @@
                     <p>Nel corso degli anni, ho sviluppato App, realizzato montaggi video e progettato siti web</p>
              
                   <ul class="collection black-text">
-                      <li class="collection-item avatar" onclick="window.location.href='https://puntiburraco.page.link/open'" style="cursor: pointer;">
+                      <li class="collection-item avatar" onclick="window.location.href='https://pointsburaco.page.link/open'" style="cursor: pointer;">
                         <img src="images/puntiburraco.png" alt="" class="circle">
                         <span class="title"><b>Punti Burraco</b></span><br>
                         Segnapunti per partite di Burraco su Android
@@ -279,8 +279,8 @@
     }
     .defaultConfig = ({
       'downloads': 10000,
-    })
-    .fetchAndActivate()
+    });
+    remoteConfig.fetchAndActivate()
     .then(() => {
       document.getElementById("downloads").innerHTML = "Oltre " + remoteConfig.getNumber('downloads') + " downloads";
     })
