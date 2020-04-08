@@ -280,8 +280,13 @@
     remoteConfig.defaultConfig = ({
       'downloads': 10000,
     });
-    remoteConfig.fetchAndActivate();  
-    document.getElementById("downloads").innerHTML = "Oltre " + remoteConfig.getNumber('downloads') + " downloads";
-  </script>
+    remoteConfig.fetchAndActivate()
+    .then(() => {
+      document.getElementById("downloads").innerHTML = "Oltre " + remoteConfig.getNumber('downloads') + " downloads";
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+    </script>
   </body>
 </html>
