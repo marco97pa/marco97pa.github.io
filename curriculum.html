@@ -137,7 +137,7 @@
                         <img src="images/puntiburraco.png" alt="" class="circle">
                         <span class="title"><b>Punti Burraco</b></span><br>
                         Segnapunti per partite di Burraco su Android
-                        <br><i>Oltre 10.000 downloads</i>
+                        <br><i id="downloads"></i>
                       </li>
                       <li class="collection-item avatar" onclick="window.location.href='http://www.thesicilytours.it'" style="cursor: pointer;">
                         <img src="images/thesicilytours.png" alt="" class="circle">
@@ -253,5 +253,35 @@
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script src="js/moment.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-remote-config.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+          apiKey: "AIzaSyADfNMKUfLBuHi9DQABVBaQX9Oki7BKDfg",
+          authDomain: "points-buraco.firebaseapp.com",
+          databaseURL: "https://points-buraco.firebaseio.com",
+          projectId: "points-buraco",
+          storageBucket: "points-buraco.appspot.com",
+          messagingSenderId: "9826407298",
+          appId: "1:9826407298:web:1ec1f6104e03bdb078359b",
+          measurementId: "G-HTW51V6DVD"
+        };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    const remoteConfig = firebase.remoteConfig();
+    remoteConfig.settings = {
+      minimumFetchIntervalMillis: 3600000,
+    };
+    remoteConfig.defaultConfig = ({
+      'downloads': 10000,
+    });
+    remoteConfig.fetchAndActivate();  
+    document.getElementById("downloads").innerHTML = "Oltre " + remoteConfig.getNumber('downloads') + " downloads";
+  </script>
   </body>
 </html>
