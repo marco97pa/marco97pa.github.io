@@ -151,6 +151,11 @@
                         Segnapunti per partite di Burraco su Android
                         <br><i id="downloads"></i>
                       </li>
+                      <li class="collection-item avatar" onclick="$('#autoscuole').modal('open');" style="cursor: pointer;">
+                        <img src="images/autoscuole.jpg" alt="" class="circle">
+                        <span class="title"><b>Autoscuole Pizzo</b></span><br>
+                        Siti web responsive per 4 autoscuole della provincia di Palermo
+                      </li>
                       <li class="collection-item avatar" onclick="window.location.href='https://marco97pa.github.io/memory-23maggio/'" style="cursor: pointer;">
                         <img src="https://marco97pa.github.io/memory-23maggio/images/icon_hq.png" alt="" class="circle">
                         <span class="title"><b>Memory 23 Maggio</b></span><br>
@@ -262,6 +267,36 @@
 
         </div>
 
+        <!-- Modal Autoscuole (Custom Material Alerts) -->
+        <div id="autoscuole" class="modal">
+          <div class="modal-content">
+            <div>
+              <img src="images/autoscuole_gen.png" style="height: 2.28rem; float: left; margin-right: 1rem;"/>
+              <h4>Autoscuole Pizzo</h4>
+            </div>
+            <p>Scegli quale sito visitare:</p>
+            <div class="row center">
+              <div class="col m6 s12" style="margin-bottom: 20px">
+                <a class="waves-effect waves-light btn-large red darken-3" href="http://www.autoscuolapomara.it">Pomara 1</a>
+              </div>
+              <div class="col m6 s12">
+                <a class="waves-effect waves-light btn-large light-blue darken-1" href="http://www.autoscuolapomara2.it">Pomara 2</a>
+              </div>
+            </div>
+            <div class="row center">
+              <div class="col m6 s12" style="margin-bottom: 20px">
+                <a class="waves-effect waves-light btn-large amber darken-2" href="http://www.autoscuolapomara3.it">Pomara 3</a>
+              </div>
+              <div class="col m6 s12">
+                <a class="waves-effect waves-light btn-large green darken-2" href="http://www.autoscuolaeden.it">Ed.En</a>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Chiudi</a>
+          </div>
+        </div>
+
     </div>
   </div>
   </div>
@@ -280,6 +315,12 @@
   <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-analytics.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-remote-config.js"></script>
   <script>
+    $(document).ready(function(){
+      $('.sidenav').sidenav();
+      $('.modal').modal();
+    });
+
+
     // Your web app's Firebase configuration
     var firebaseConfig = {
           apiKey: "AIzaSyADfNMKUfLBuHi9DQABVBaQX9Oki7BKDfg",
