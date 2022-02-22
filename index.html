@@ -237,10 +237,12 @@
   <script src="js/init.js"></script>
   <script src="js/moment.js"></script>
   <script src="js/clipboard.min.js"></script>
+  <script src="js/console.image.min.js" type="text/javascript"></script>
   <script>
     $(document).ready(function(){
       $('.sidenav').sidenav();
       $('.modal').modal();
+      console.image("https://i.imgur.com/T7PFuwO.jpg");
     });
 
     var clipboard = new ClipboardJS('.modal-copy');
