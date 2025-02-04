@@ -37,6 +37,20 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <style>
+  .modal{
+    width: 80vw;
+    height: 100vh;
+  }
+  .img-wrapper{
+    max-height: 50%;
+    overflow: hidden;
+  }
+
+  .img-wrapper img{
+      width: 100%;
+  }
+  </style>
 </head>
 
 
@@ -69,10 +83,13 @@
 
       <div class="container">
         <br><br>
-        <div class="row center">
-          <div id="medium-widget-desktop" class="hide-on-med-and-down"></div>
-          <div id="medium-widget-mobile" class="hide-on-large-only"></div>
+        <div class="row center" id="jsonContent">
         </div>
+        <div class="row center">
+          <ul class="pagination" id="pagin">
+          </ul>
+        </div>
+        
       </div>
       
 
@@ -81,15 +98,96 @@
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script src="js/moment.js"></script>
-  <script src="https://medium-widget.pixelpoint.io/widget.js"></script>
   <script>
-        if($('#medium-widget-desktop').is(':visible')){
-          MediumWidget.Init({renderTo: '#medium-widget-desktop', params: {"resource":"https://medium.com/@marco97pa","postsPerLine":3,"limit":10,"picture":"big","fields":["description","publishAt"],"ratio":"landscape"}})
-        }
-        else{
-          MediumWidget.Init({renderTo: '#medium-widget-mobile', params: {"resource":"https://medium.com/@marco97pa","postsPerLine":1,"limit":10,"picture":"big","fields":["description","publishAt"],"ratio":"landscape"}})
-        }
-</script>
+     $(function () {
+            var mediumPromise = new Promise(function (resolve) {
+            var $content = $('#jsonContent');
+            var data = {
+                rss: 'https://medium.com/feed/@marco97pa'
+            };
+            $.get('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40marco97pa', data, function (response) {
+                if (response.status == 'ok') {
+                    var output = '';
+                    $.each(response.items, function (k, item) {
+                        output += `<div class="col s12 m6"> <div class="card medium">`;
+                        var tagIndex = item.description.indexOf('<img'); // Find where the img tag starts
+                        var srcIndex = item.description.substring(tagIndex).indexOf('src=') + tagIndex; // Find where the src attribute starts
+                        var srcStart = srcIndex + 5; // Find where the actual image URL starts; 5 for the length of 'src="'
+                        var srcEnd = item.description.substring(srcStart).indexOf('"') + srcStart; // Find where the URL ends
+                        var src = item.description.substring(srcStart, srcEnd); // Extract just the URL
+                        // Show the image on the card
+                        output += `<div class="card-image waves-effect waves-block waves-light"> <img class="activator" src="${src}" alt="Cover image"></div>`;
+                        // Show the title of the card
+                        output += `<div class="card-content"> <span class="card-title activator grey-text text-darken-4">${item.title}</span> ${item.pubDate}</div>`;
+                        // Get the full content
+                        var full = item.description;
+                        // Uncomment for debug
+                        // console.log(full)
+                        // Make images responsive and smaller
+                        full = full.replaceAll('<img', `<img class="responsive-img" style="width: 60%;"`);
+                        // Remove figures tags
+                        full = full.replaceAll('<figure>', '');
+                        full = full.replaceAll('</figure>', ' ');3
+                        // Replace first image with a wrapper to avoid to make it too big
+                        full = full.replace(/<img class="responsive-img"[^>]*>/, function(match) {
+                          return `<div class="img-wrapper">${match}</div>`;
+                        });
+                        // Replace the last tag automatically added by Medium
+                        let lastTagIndex = full.lastIndexOf('<');
+                        if (lastTagIndex !== -1) {
+                          full = full.substring(0, lastTagIndex);
+                        }
+                        // Show the button to read
+                        output += `<div class="card-action"> <a class="waves-effect waves-light modal-trigger" href="#modal${k}">Leggi</a> </span>`;
+                        output += `</div></div></div>`;
+                        // Make a modal to read all the contents
+                        output += `<div id="modal${k}" class="modal modal-fixed-footer"><div class="modal-content">${full}</div> <div class="modal-footer"> <a href="${item.link}" class="waves-effect waves-green btn-flat">Leggi articolo completo</a> <a href="#!" class="modal-close waves-effect waves-green btn-flat">Chiudi</a> </div> </div>`
+                        return k < 50;
+                    });
+                    resolve($content.html(output));
+                }
+            });
+            });
+
+mediumPromise.then(function()
+            {
+                //Pagination
+                pageSize = 6;
+
+                var pageCount = $(".card").length / pageSize;
+
+                for (var i = 0; i < pageCount; i++) {
+                    $("#pagin").append(`<li class="waves-effect"><a href="#">${(i + 1)}</a></li> `);
+                }
+                $("#pagin li:nth-child(1)").addClass("active");
+                showPage = function (page) {
+                    $(".card").hide();
+                    $(".card").each(function (n) {
+                        if (n >= pageSize * (page - 1) && n < pageSize * page)
+                            $(this).show();
+                    });
+                }
+
+                showPage(1);
+
+                $("#pagin li").click(function () {
+                    $("#pagin li").removeClass("active");
+                    $(this).addClass("active");
+                    showPage(parseInt($(this).text()))
+                });
+
+                // SHOWS MODALS
+                $('.modal').modal();
+
+            });
+
+
+        });
+
+
+
+
+  </script>
   
 </body>
 </html>
