@@ -77,6 +77,25 @@
     .btn-large > img{
       background: transparent;
     }
+
+    /* Customize slideshow */
+    .slider .slides li img {
+      -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent);
+      mask-image: linear-gradient(to bottom, black 70%, transparent);
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+    }
+    .slider .slides li {
+      background-color: black;
+    }
+    .slider .indicators .indicator-item.active {
+      background-color: #009688 !important;
+    }
+    .slider {
+      background: black;
+    }
   </style>
 </head>
 
@@ -148,6 +167,48 @@
           <h5 class="header col s12 light">Nessun ostacolo potrà mai fermarti finchè la voglia di volare sarà più forte della paura di cadere</h5>
       </div>
 
+      <div class="row center">
+        <div class="slider">
+          <ul class="slides">
+            <li>
+              <img src="images/slider/palermo.jpg"> 
+              <div class="caption center-align">
+                <h3>Panorama su Palermo</h3>
+                <h5 class="light grey-text text-lighten-3">Una vista insolita sulla mia città</h5>
+              </div>
+            </li>
+            <li>
+              <img src="images/slider/mango.jpg"> 
+              <div class="caption bottom-align">
+                <h3>Angelina Mango</h3>
+                <h5 class="light grey-text text-lighten-3">Una delle sue ultime performance live al Nameless Music Festival</h5>
+              </div>
+            </li>
+            <li>
+              <img src="images/slider/etna.jpg"> 
+              <div class="caption right-align">
+                <h3>"Anelli di fumo"</h3>
+                <h5 class="light grey-text text-lighten-3">Uno "sbuffo" insolito del vulcano Etna</h5>
+              </div>
+            </li>
+            <li>
+              <img src="images/slider/ferrari.jpg"> 
+              <div class="caption center-align">
+                <h3>Ferrari</h3>
+                <h5 class="light grey-text text-lighten-3">La Formula 1 è una mia passione con gioie e dolori</h5>
+              </div>
+            </li>
+            <li>
+              <img src="images/slider/xg.jpg"> 
+              <div class="caption left-align">
+                <h3>XG</h3>
+                <h5 class="light grey-text text-lighten-3">Gruppo di artiste giapponesi in concerto a Bruxelles</h5>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
       </div>
     </div>
   </div>
@@ -177,12 +238,17 @@
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script src="js/moment.js"></script>
-  <script src="js/console.image.min.js" type="text/javascript"></script>
   <script>
     $(document).ready(function(){
       $('.sidenav').sidenav();
       $('.modal').modal();
-      console.image("https://i.imgur.com/T7PFuwO.jpg");
+      var elems = document.querySelectorAll('.slider');
+      var instances = M.Slider.init(elems, {'height' : 770, 'indicators' : true});
+      console.log("███    ███  █████  ██████   ██████  ██████  ");
+      console.log("████  ████ ██   ██ ██   ██ ██      ██    ██ ");
+      console.log("██ ████ ██ ███████ ██████  ██      ██    ██ ");
+      console.log("██  ██  ██ ██   ██ ██   ██ ██      ██    ██ ");
+      console.log("██      ██ ██   ██ ██   ██  ██████  ██████  ");
     });
 
 

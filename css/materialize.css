@@ -8328,7 +8328,7 @@ input[type=range]::-ms-thumb {
 .slider .slides li .caption {
   color: #fff;
   position: absolute;
-  top: 15%;
+  bottom: 5%;
   left: 15%;
   width: 70%;
   opacity: 0;
@@ -8348,7 +8348,6 @@ input[type=range]::-ms-thumb {
   left: 0;
   right: 0;
   bottom: 0;
-  margin: 0;
 }
 
 .slider .indicators .indicator-item {
